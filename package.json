@@ -2,7 +2,7 @@
   "name": "language-grace",
   "version": "0.0.0",
   "description": "Syntax hilighting for the grace programming language",
-  "repository": "https://github.com/atom/language-grace",
+  "repository": "https://github.com/alokedesai/Atom-Grace",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"
