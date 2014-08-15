@@ -1,0 +1,382 @@
+'name': 'Grace'
+'scopeName': 'source.grace'
+'fileTypes': [
+  'grace'
+]
+'patterns': [
+  {
+    'include': '#comment'
+  }
+  {
+    'name': 'meta.type.grace'
+    'begin': '(?<![A-Za-z\\d\'])(type)(?![A-Za-z\\d\'])'
+    'beginCaptures':
+      '1':
+        'name': 'keyword.type.grace'
+      '2':
+        'name': 'entity.name.type.grace'
+    'end': '(=)'
+    'endCaptures':
+      '1':
+        'name': 'keyword.operator.grace'
+    'patterns': [
+      {
+        'begin': '(?<![A-Za-z\\d\'])(is)(?![A-Za-z\\d\'])'
+        'beginCaptures':
+          '1':
+            'name': 'keyword.grace'
+        'end': '(?==)'
+        'patterns': [
+          {
+            'name': 'support.function.annotation.grace'
+            'match': '[A-Za-z][A-Za-z\\d\']*'
+          }
+          {
+            'include': '$self'
+          }
+        ]
+      }
+      {
+        'include': '#bad_names'
+      }
+      {
+        'name': 'support.type.grace'
+        'match': '[A-Za-z][A-Za-z\\d\']*'
+      }
+      {
+        'include': '$self'
+      }
+    ]
+  }
+  {
+    'name': 'meta.method.grace'
+    'begin': '(?<![A-Za-z\\d\'])(method)(?![A-Za-z\\d\'])'
+    'beginCaptures':
+      '1':
+        'name': 'keyword.grace'
+    'end': '\\{'
+    'patterns': [
+      {
+        'include': '#signature'
+      }
+    ]
+  }
+  {
+    'name': 'meta.class.grace'
+    'begin': '\\b(class)\\s+([A-z][A-z\\d\']*)'
+    'beginCaptures':
+      '1':
+        'name': 'keyword.class.grace'
+      '2':
+        'name': 'entity.name.class.grace'
+    'end': '\\{'
+    'patterns': [
+      {
+        'include': '#signature'
+      }
+    ]
+  }
+  {
+    'name': 'meta.definition.grace'
+    'begin': '(?<![A-Za-z\\d\'])(def)(?![A-Za-z\\d\'])'
+    'beginCaptures':
+      '1':
+        'name': 'keyword.definition.grace'
+    'end': '(?<![^\\w\\d\'\\s])(?:(=)|(:=))(?![^\\w\\s])|$'
+    'endCaptures':
+      '1':
+        'name': 'keyword.operator.grace'
+      '2':
+        'name': 'invalid.illegal.grace'
+    'patterns': [
+      {
+        'begin': '(:)'
+        'beginCaptures':
+          '1':
+            'name': 'keyword.operator.grace'
+        'end': '(?=(?<![A-Za-z\\d\'])is(?![A-Za-z\\d\'])|(?<![^\\w\\d\'\\s])(?:(=)|(:=))(?![^\\w\\d\'\\s]))|$'
+        'patterns': [
+          {
+            'include': '$self'
+          }
+          {
+            'name': 'support.type.grace'
+            'match': '[A-Za-z][A-Za-z\\d\']*'
+          }
+        ]
+      }
+      {
+        'begin': '(?<![A-Za-z\\d\'])(is)(?![A-Za-z\\d\'])'
+        'beginCaptures':
+          '1':
+            'name': 'keyword.grace'
+        'end': '(?=(?<![^\\w\\d\'\\s])(?:(=)|(:=))(?![^\\w\\d\'\\s]))|$'
+        'patterns': [
+          {
+            'include': '$self'
+          }
+          {
+            'name': 'support.function.annotation.grace'
+            'match': '[A-Za-z][A-Za-z\\d\']*'
+          }
+        ]
+      }
+      {
+        'include': '#bad_names'
+      }
+      {
+        'name': 'entity.definition.grace'
+        'match': '\\b_\\b|[A-Za-z][A-Za-z\\d\']*'
+      }
+    ]
+  }
+  {
+    'name': 'meta.variable.grace'
+    'begin': '(?<![A-Za-z\\d\'])(var)'
+    'beginCaptures':
+      '1':
+        'name': 'keyword.variable.grace'
+    'end': '(?<![^\\w\\d\'\\s])(?:(:=)|(=))(?![^\\w\\d\'\\s])|$'
+    'endCaptures':
+      '1':
+        'name': 'keyword.operator.grace'
+      '2':
+        'name': 'invalid.illegal.grace'
+    'patterns': [
+      {
+        'begin': '(:)'
+        'beginCaptures':
+          '1':
+            'name': 'keyword.operator.grace'
+        'end': '(?=(?<![A-Za-z\\d\'])is(?![A-Za-z\\d\'])|(?<![^\\w\\d\'\\s])(?:(=)|(:=))(?![^\\w\\d\'\\s]))|$'
+        'patterns': [
+          {
+            'include': '$self'
+          }
+          {
+            'name': 'support.type.grace'
+            'match': '[A-Za-z][A-Za-z\\d\']*'
+          }
+        ]
+      }
+      {
+        'begin': '(?<![A-Za-z\\d\'])(is)(?![A-Za-z\\d\'])'
+        'beginCaptures':
+          '1':
+            'name': 'keyword.grace'
+        'end': '(?=(?<![^\\w\\d\'\\s])(?:(=)|(:=))(?![^\\w\\d\'\\s]))|$'
+        'patterns': [
+          {
+            'include': '$self'
+          }
+          {
+            'name': 'support.function.annotation.grace'
+            'match': '[A-Za-z][A-Za-z\\d\']*'
+          }
+        ]
+      }
+      {
+        'include': '#bad_names'
+      }
+      {
+        'name': 'entity.variable.grace'
+        'match': '\\b_\\b|[A-Za-z][A-Za-z\\d\']*'
+      }
+    ]
+  }
+  {
+    'name': 'meta.block.grace'
+    'begin': '\\{'
+    'end': '(->)|(.(?!->))*?(?=$|[^A-z\\d\\s\'_,:])'
+    'endCaptures':
+      '1':
+        'name': 'keyword.operator.grace'
+    'patterns': [
+      {
+        'match': '([A-z][A-z\\d\']*|_)(?:\\s*(:)\\s*([A-z][A-z\\d\'\\s|&]*))?'
+        'captures':
+          '1':
+            'name': 'variable.block.parameter.grace'
+          '2':
+            'name': 'keyword.operator.type.grace'
+          '3':
+            'name': 'storage.type.block.parameter.grace'
+      }
+    ]
+  }
+  {
+    'name': 'string.quoted.double.grace'
+    'begin': '"'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.string.begin.grace'
+    'end': '"'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.string.end.grace'
+    'patterns': [
+      {
+        'match': '\\\\(x\\h{2}|[0-2][0-7]{,2}|3[0-6][0-7]|37[0-7]?|[4-7][0-7]?|.)'
+        'name': 'constant.character.escape.grace'
+      }
+      {
+        'name': 'source.grace.embedded.source'
+        'begin': '(\\{)'
+        'beginCaptures':
+          '1':
+            'name': 'punctuation.section.embedded.begin.grace'
+        'end': '(\\})'
+        'endCaptures':
+          '1':
+            'name': 'punctuation.section.embedded.end.grace'
+        'patterns': [
+          {
+            'include': '$self'
+          }
+        ]
+      }
+    ]
+  }
+  {
+    'name': 'meta.annotation.type.grace'
+    'match': '([A-z][A-z\\d\']*)\\s*(:)\\s*([A-z][A-z\\d\'><&|\\s]*)'
+    'captures':
+      '1':
+        'name': 'variable.annotated.type.grace'
+      '2':
+        'name': 'keyword.operator.annotation.type.grace'
+      '3':
+        'name': 'storage.type.annotation.grace'
+  }
+  {
+    'name': 'storage.type.generic.grace'
+    'match': '<[A-z\\d\'><\\s]*>'
+  }
+  {
+    'name': 'meta.type.method.return.grace'
+    'match': '(->)\\s*([A-z\\d\'><&|]*)'
+    'captures':
+      '1':
+        'name': 'keyword.operator.type.method.return.grace'
+      '2':
+        'name': 'storage.type.method.return.grace'
+  }
+  {
+    'name': 'keyword.control.grace'
+    'match': '(?<![A-Za-z\\d\'])(return)(?![A-Za-z\\d\'])'
+  }
+  {
+    'name': 'support.function.operator.grace'
+    'match': '[-|!%$?&\\*~+\\</>\\\\]'
+  }
+  {
+    'name': 'support.function.operator.grace'
+    'match': '[-|!%$?&\\*~+\\=</>\\\\][-|!%$?&\\*~+:\\=</>\\\\]+'
+  }
+  {
+    'name': 'support.function.operator.grace'
+    'match': ':[-|!%$?&\\*~+:\\</>\\\\]'
+  }
+  {
+    'name': 'support.function.operator.grace'
+    'match': '[-|!%$?&\\*~+:\\=</>\\\\][-|!%$?&\\*~+:\\=</>\\\\][-|!%$?&\\*~+:\\=</>\\\\]+'
+  }
+  {
+    'name': 'keyword.operator.grace'
+    'match': '(:=|=|:)'
+  }
+  {
+    'name': 'keyword.grace'
+    'match': '(?<![A-Za-z\\d\'])(dialect|import|as|object|method|class|type|def|var|where|is|inherits)(?![A-Za-z\\d\'])'
+  }
+  {
+    'name': 'constant.numeric.grace'
+    'match': '\\b((0(x|X)[0-9a-fA-F]+)|([0-9]+(\\.[0-9]+)?))\\b'
+  }
+  {
+    'name': 'support.function.annotation.grace'
+    'match': '(?<![A-Za-z\\d\'])(public|confidential|private|readable|writable|annotation)(?![A-Za-z\\d\'])'
+  }
+  {
+    'name': 'support.function.grace'
+    'match': '(?<![A-Za-z\\d\'])(if|then|else|elseif|for|while|do|match|case|print)(?![A-Za-z\\d\'])'
+  }
+  {
+    'name': 'support.type.grace'
+    'match': '(?<![A-Za-z\\d\'])(Boolean|String|Number|List|Block|Dynamic|Done)(?![A-Za-z\\d\'])'
+  }
+  {
+    'name': 'variable.language.self.grace'
+    'match': '(?<![A-Za-z\\d\'])(super|self)(?![A-Za-z\\d\'])'
+  }
+  {
+    'name': 'constant.language.boolean.true.grace'
+    'match': '(?<![A-Za-z\\d\'])true(?![A-Za-z\\d\'])'
+  }
+  {
+    'name': 'constant.language.boolean.false.grace'
+    'match': '(?<![A-Za-z\\d\'])false(?![A-Za-z\\d\'])'
+  }
+]
+'repository':
+  'comment':
+    'match': '//.*$'
+    'name': 'comment.line.grace'
+  'bad_names':
+    'name': 'invalid.illegal.grace'
+    'match': '(?<![A-Za-z\\d\'])(dialect|import|as|object|method|class|type|def|var|where|is|inherits)(?![A-Za-z\\d\'])'
+  'signature':
+    'name': 'meta.signature.grace'
+    'patterns': [
+      {
+        'begin': '(?<![^\\w\\d\'\\s])(:)(?![^\\w\\d\'\\s])'
+        'beginCaptures':
+          '1':
+            'name': 'keyword.operator.grace'
+        'end': ',|\\)'
+        'patterns': [
+          {
+            'include': '$self'
+          }
+          {
+            'name': 'support.type.grace'
+            'match': '[A-Za-z][A-Za-z\\d\']*'
+          }
+        ]
+      }
+      {
+        'begin': '(?<![^\\w\\d\'\\s])(->)(?![^\\w\\d\'\\s])'
+        'beginCaptures':
+          '1':
+            'name': 'keyword.operator.grace'
+        'end': '(?=(?<![A-Za-z\\d\'])is(?![A-Za-z\\d\'])|\\{)'
+        'patterns': [
+          {
+            'include': '$self'
+          }
+          {
+            'name': 'support.type.grace'
+            'match': '[A-Za-z][A-Za-z\\d\']*'
+          }
+        ]
+      }
+      {
+        'begin': '(?<![A-Za-z\\d\'])(is)(?![A-Za-z\\d\'])'
+        'beginCaptures':
+          '1':
+            'name': 'keyword.grace'
+        'end': '(?=\\{)'
+        'patterns': [
+          {
+            'include': '$self'
+          }
+          {
+            'name': 'support.function.annotation.grace'
+            'match': '[A-Za-z][A-Za-z\\d\']*'
+          }
+        ]
+      }
+      {
+        'include': '#bad_names'
+      }
+    ]
