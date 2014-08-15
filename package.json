@@ -1,7 +1,7 @@
 {
   "name": "language-grace",
   "version": "1.0.0",
-  "description": "Syntax hilighting for the grace programming language",
+  "description": "Syntax highlighting for the grace programming language",
   "repository": "https://github.com/alokedesai/Atom-Grace",
   "license": "MIT",
   "engines": {
