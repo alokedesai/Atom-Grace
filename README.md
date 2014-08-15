@@ -1,3 +1,3 @@
 # language-grace package
 
-A short description of your package.
+An Atom package that adds syntax hilighting for the grace programming language.
